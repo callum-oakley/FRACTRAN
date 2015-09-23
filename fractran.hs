@@ -1,5 +1,7 @@
 -- see https://en.wikipedia.org/wiki/FRACTRAN
 
+-- to do: multipe parameters
+
 import Data.Maybe
 import Data.Ratio
 import Data.Word
@@ -34,7 +36,7 @@ run startBase endBase game initial =
         takeWhileJust = map fromJust . takeWhile isJust
         computation = iterate (fractran game) (Just (startBase^initial))
 
-primeGame :: Game
+primeGame :: Game -- 2 2
 primeGame = [
     17%91,
     78%85,
@@ -51,7 +53,7 @@ primeGame = [
     1 % 7,
     55% 1]
 
-hammingGame :: Game
+hammingGame :: Game -- 2 13
 hammingGame = [
     33%20,
     5 %11,
@@ -60,3 +62,28 @@ hammingGame = [
     2 % 3,
     10% 7,
     7 % 2]
+
+kilminsterGame :: Game -- 10 10
+kilminsterGame = [
+    7 %  3,
+    99% 98,
+    13% 49,
+    39% 35,
+    36% 91,
+    10%143,
+    49% 13,
+    7 % 11,
+    1 %  2,
+    91%  1]
+
+kilminsterGame' :: Game -- 10 10
+kilminsterGame' = [
+    3  % 11,
+    847% 45,
+    143%  6,
+    7  %  3,
+    10 % 91,
+    3  %  7,
+    36 %325,
+    1  %  2,
+    36 %  5]
