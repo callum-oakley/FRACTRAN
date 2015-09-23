@@ -26,11 +26,13 @@ fractran game m =
     fmap (\q -> numerator (q * ((fromJust m) % 1))) . maybeHead .
     filter (\q -> denominator q `divides` fromJust m) $ game
 
-run :: Game -> Word -> [Word]
-run game initial = filterPowersAndTakeLogs . takeWhileJust $ computation
-  where filterPowersAndTakeLogs = map (wordLog 2) . filter (isPowerOf 2)
+run :: Word -> Word -> Game -> Word -> [Word]
+run startBase endBase game initial =
+    filterPowersAndTakeLogs . takeWhileJust $ computation
+  where filterPowersAndTakeLogs =
+            map (wordLog endBase) . filter (isPowerOf endBase)
         takeWhileJust = map fromJust . takeWhile isJust
-        computation = iterate (fractran game) (Just (2^initial))
+        computation = iterate (fractran game) (Just (startBase^initial))
 
 primeGame :: Game
 primeGame = [
@@ -49,4 +51,12 @@ primeGame = [
     1 % 7,
     55% 1]
 
-main = mapM_ (putStrLn . show) (run primeGame 1)
+hammingGame :: Game
+hammingGame = [
+    33%20,
+    5 %11,
+    13%10,
+    1 % 5,
+    2 % 3,
+    10% 7,
+    7 % 2]
